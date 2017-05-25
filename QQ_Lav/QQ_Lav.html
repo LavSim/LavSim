@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lavatory Service</title>
+    </head>
+    <body style="background-color:lightgrey">
+
+        <script type="text/javascript">
+            /** Initialise variables
+            * For all "Valves and Covers", 0=Closed, 1=Open
+            * For all "Hoses", 0=Not Attached, 1=Attached
+            * "Dial" can be any positive int
+            * For "Blockage", 0=No Blockage, 1=Blockage
+            * Note: Charge_Hose_1/2 represent the same hose attached to a 2 separate possible connections
+            */
+            var Dump_Valve_1 = 0;
+            var Dump_Valve_2 = 0;
+            var Waste_Outlet_Cover = 0;
+            var Waste_Hose = 0;
+            var Waste_Valve = 0;
+            var Charge_Point_Cover_1 = 0;
+            var Charge_Point_Cover_2 = 0;
+            var Charge_Hose_1 = 0;
+            var Charge_Hose_2 = 0;
+
+            var Lav_Cart_Valve = 0;
+            var Lav_Cart_Dial = 0;
+            var Blockage = 0;
+
+            function Ramp_Spill() {
+                var Spill=document.getElementById('Spill_Message');
+                Spill.style.visibility = 'visible';
+            }
+
+            function Change_State(w) {
+
+                w = !w;
+                if (Waste_Hose = 0) {
+                    if (Waste_Valve = 1) {
+                        Ramp_Spill();
+                    }
+                }
+            }
+        </script>
+
+
+        <h1 style="font-family:Helvetica; color: cornflowerblue;text-align:center">Lavatory Service</h1>
+        <style>
+            .fixed-ratio-resize { /* basic responsive img */
+                max-width: 100%;
+                height: auto;
+                width: auto\9;
+            }
+        </style>
+
+        <div style="position:relative; left:0; top:0;">
+
+            <img class="fixed-ratio-resize" src="Lav_Panel.png" style="position:relative; top:0; left:0; visibility:visible;"/>
+
+            <img width="4%" class="fixed-ratio-resize" src="Dump_Handle.png" id="Dump_Handle_1"
+                 style="position:absolute; top:19.5%; left:19.5%; visibility:visible;"
+                 onclick="document.getElementById('Dump_Handle_1').style='position:absolute; top:19.5%; left:19.5%; visibility:hidden';
+            document.getElementById('Dump_Handle_1_Rotated').style='position:absolute; top:27.5%; left:14.5%; visibility:visible';">
+            <img width="4%" class="fixed-ratio-resize" src="Dump_Handle.png" id="Dump_Handle_2"
+                 style="position:absolute; top:19.5%; left:43%; visibility:visible;"
+                 onclick="document.getElementById('Dump_Handle_2').style='position:absolute; top:19.5%; left:43%; visibility:hidden';
+            document.getElementById('Dump_Handle_2_Rotated').style='position:absolute; top:27.5%; left:38%; visibility:visible';">
+
+            <img width="14%" class="fixed-ratio-resize" src="Dump_Handle_90deg.png" id="Dump_Handle_1_Rotated"
+                 style="position:absolute; top:27.5%; left:14.5%; visibility:hidden;"
+                 onclick="document.getElementById('Dump_Handle_1_Rotated').style='position:absolute; top:27.5%; left:14.5%; visibility:hidden';
+            document.getElementById('Dump_Handle_1').style='position:absolute; top:19.5%; left:19.5%; visibility:visible';">
+            <img width="14%" class="fixed-ratio-resize" src="Dump_Handle_90deg.png" id="Dump_Handle_2_Rotated"
+                 style="position:absolute; top:27.5%; left:38%; visibility:hidden;"
+                 onclick="document.getElementById('Dump_Handle_2_Rotated').style='position:absolute; top:27.5%; left:38%; visibility:hidden';
+            document.getElementById('Dump_Handle_2').style='position:absolute; top:19.5%; left:43%; visibility:visible';">
+
+            <img width="30%" class="fixed-ratio-resize" src="Waste_Outlet_Cover.png" id="Waste_Outlet_Cover"
+                 style="position:absolute; top:18%; left:60%; visibility:visible;"
+                 onclick="document.getElementById('Waste_Outlet_Cover').style='position:absolute; top:18%; left:60%; visibility:hidden';
+            document.getElementById('Open_Waste_Outlet_Cover').style='position:absolute; top:-22%; left:60%; visibility:visible';
+            document.getElementById('Waste_Hose').style='position:absolute; top:46%; left:85%; visibility:visible';">
+
+            <img width="30%" class="fixed-ratio-resize" src="Waste_Outlet_Cover_Open.png" id="Open_Waste_Outlet_Cover"
+                 style="position:absolute; top:-22%; left:60%; visibility:hidden;"
+                 onclick="document.getElementById('Waste_Outlet_Cover').style='position:absolute; top:18%; left:60%; visibility:visible';
+            document.getElementById('Open_Waste_Outlet_Cover').style='position:absolute; top:-22%; left:60%; visibility:hidden';
+            document.getElementById('Waste_Hose').style='position:absolute; top:46%; left:85%; visibility:hidden'">
+
+            <img width="50%" class="fixed-ratio-resize" src="Waste_Hose.png" id="Waste_Hose"
+                 style="position:absolute; top:23%; left:61%; visibility:hidden;" onclick="
+            document.getElementById('Waste_Hose_2').style='position:absolute; top:23%; left:61%; visibility:visible';
+            document.getElementById('Waste_Hose').style='position:absolute; top:46%; left:85%; visibility:hidden';
+            Change_State(Waste_Hose)">
+            <img width="50%" class="fixed-ratio-resize" src="Waste_Hose.png" id="Waste_Hose_2"
+                 style="position:absolute; top:23%; left:61%; visibility:hidden;" onclick="
+            document.getElementById('Waste_Hose_2').style='position:absolute; top:23%; left:61%; visibility:hidden';
+            document.getElementById('Waste_Hose').style='position:absolute; top:46%; left:85%; visibility:visible';
+            Change_State(Waste_Hose); Ramp_Spill()">
+
+            <img width="5%" class="fixed-ratio-resize" src="Waste_Valve_Handle.png" id="Waste_Valve_Handle"
+                 style="position:absolute; top:28.5%; left:56.5%; visibility:visible;"
+                 onclick="document.getElementById('Waste_Valve_Handle').style='position:absolute; top:28.5%; left:56.5%; visibility:hidden';
+            document.getElementById('Waste_Valve_Handle_Open').style='position:absolute; top:34%; left:53.05%; visibility:visible';
+            Change_State(Waste_Valve)">
+            <img width="10%" class="fixed-ratio-resize" src="Waste_Valve_Handle_Open.png" id="Waste_Valve_Handle_Open"
+                 style="position:absolute; top:34%; left:53.05%; visibility:hidden;"
+                 onclick="document.getElementById('Waste_Valve_Handle_Open').style='position:absolute; top:34%; left:53.05%; visibility:hidden';
+            document.getElementById('Waste_Valve_Handle').style='position:absolute; top:28.5%; left:56.5%; visibility:visible';
+            Change_State(Waste_Valve)">
+
+            <img width="30%" class="fixed-ratio-resize" src="Charge_Point_Cover.png" id="Charge_Point_Cover_1"
+                 style="position:absolute; top:58%; left:14%; visibility:visible;"
+                 onclick="document.getElementById('Charge_Point_Cover_1').style='position:absolute; top:58%; left:14%; visibility:hidden';
+            document.getElementById('Charge_Point_Cover_1_Rotated').style='position:absolute; top:83%; left:14%; visibility:visible';
+            document.getElementById('Charge_Hose').style='position:absolute; top:83%; left:55%; visibility:visible';">
+            <img width="30%" class="fixed-ratio-resize" src="Charge_Point_Cover.png" id="Charge_Point_Cover_2"
+                 style="position:absolute; top:58%; left:38%; visibility:visible;"
+                 onclick="document.getElementById('Charge_Point_Cover_2').style='position:absolute; top:58%; left:38%; visibility:hidden';
+            document.getElementById('Charge_Point_Cover_2_Rotated').style='position:absolute; top:83%; left:38%; visibility:visible';
+            document.getElementById('Charge_Hose').style='position:absolute; top:83%; left:55%; visibility:visible';">
+
+            <img width="40%" class="fixed-ratio-resize" src="Charge_Point_Cover_90deg.png" id="Charge_Point_Cover_1_Rotated"
+                 style="position:absolute; top:83%; left:14%; visibility:hidden;"
+                 onclick="document.getElementById('Charge_Point_Cover_1').style='position:absolute; top:58%; left:14%; visibility:visible';
+            document.getElementById('Charge_Point_Cover_1_Rotated').style='position:absolute; top:83%; left:14%; visibility:hidden';
+            document.getElementById('Charge_Hose').style='position:absolute; top:83%; left:55%; visibility:hidden';
+            document.getElementById('RH_Toilet_Button').style='position:absolute; top:85%; left:14.5%; visibility:hidden'">
+            <img width="40%" class="fixed-ratio-resize" src="Charge_Point_Cover_90deg.png" id="Charge_Point_Cover_2_Rotated"
+                 style="position:absolute; top:83%; left:38%; visibility:hidden;"
+                 onclick="document.getElementById('Charge_Point_Cover_2').style='position:absolute; top:58%; left:38%; visibility:visible';
+            document.getElementById('Charge_Point_Cover_2_Rotated').style='position:absolute; top:83%; left:38%; visibility:hidden';
+            document.getElementById('Charge_Hose').style='position:absolute; top:83%; left:55%; visibility:hidden';
+            document.getElementById('LH_Toilet_Button').style='position:absolute; top:85%; left:38.5%; visibility:hidden'">
+
+            <button style="visibility:hidden" id="RH_Toilet_Button"
+                    onclick="document.getElementById('RH_Toilet_Button').style='color: cornflowerblue; font-family: Helvetica; font-size: medium ;position:absolute; top:85%; left:14.5%; visibility:hidden';
+            document.getElementById('LH_Toilet_Button').style='color: cornflowerblue; font-family: Helvetica; font-size: medium ;position:absolute; top:85%; left:38.5%; visibility:hidden';
+            document.getElementById('Charge_Hose').style='position:absolute; visibility:hidden';
+            document.getElementById('Charge_Hose_2').style='position:absolute; top:55%; left:13%; visibility:visible';">Connect to RH Toilet</button>
+            <button style="visibility:hidden" id="LH_Toilet_Button"
+                    onclick="document.getElementById('LH_Toilet_Button').style='color: cornflowerblue; font-family: Helvetica; font-size: medium ;position:absolute; top:85%; left:38.5%; visibility:hidden';
+            document.getElementById('RH_Toilet_Button').style='color: cornflowerblue; font-family: Helvetica; font-size: medium ;position:absolute; top:85%; left:14.5%; visibility:hidden';
+            document.getElementById('Charge_Hose').style='position:absolute; visibility:hidden';
+            document.getElementById('Charge_Hose_2').style='position:absolute; top:55%; left:37%; visibility:visible';">Connect to LH Toilet</button>
+
+            <img width="30%" class="fixed-ratio-resize" src="Charge_Hose.png" id="Charge_Hose"
+                 style="position:absolute; visibility:hidden;"
+                 onclick="document.getElementById('RH_Toilet_Button').style='color: cornflowerblue; font-family: Helvetica; font-size: medium ;position:absolute; top:85%; left:14.5%; visibility:visible';
+                 document.getElementById('LH_Toilet_Button').style='color: cornflowerblue; font-family: Helvetica; font-size: medium ;position:absolute; top:85%; left:38.5%; visibility:visible';"/>
+            <img width="30%" class="fixed-ratio-resize" src="Charge_Hose.png" id="Charge_Hose_2"
+                 style="position:absolute; visibility:hidden;"
+                 onclick="document.getElementById('Charge_Hose_2').style='position:absolute; top:83%; left:55%; visibility:hidden';
+            document.getElementById('Charge_Hose').style='position:absolute; top:83%; left:55%; visibility:visible';">
+
+            <p width="100%" class="fixed-ratio-resize" id="Spill_Message" style="background-color:darkgrey; border-color:gray; border:outset; padding:5%; text-align:center; font-family:Helvetica;
+            font-size:x-large; color:cornflowerblue; position:absolute; top: 25%; left: 24%; visibility:hidden"; onclick="document.getElementById('Spill_Message').style.visibility='hidden'">
+            <br/>
+            <br/>
+            <br/><b>Get the mop, the goop is on the deck!<br/>
+                You opened the dump valve with no hose attached!</b>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            </p>
+        </div>
+
+
+
+    </body>
+</html>
